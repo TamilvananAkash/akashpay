@@ -4,10 +4,8 @@
     <meta http-equiv="refresh" content="2; url=upi://pay?pa=paytm.s1vnqj2@pty&pn=Vallaiah%20Reddy%20Milk&am=55&cu=INR">
     <title>Redirecting to Payment...</title>
   </head>
-  <body style="font-family: Arial; text-align: center; margin-top: 100px;">
+  <body>
     <h2>Redirecting to Paytm Payment of ₹55...</h2>
-    <p>If it doesn’t open automatically, 
-      <a href="upi://pay?pa=paytm.s1vnqj2@pty&pn=Vallaiah%20Reddy%20Milk&am=55&cu=INR">click here to pay manually</a>.
-    </p>
+    <p>If it doesn’t open automatically, <a href="upi://pay?pa=paytm.s1vnqj2@pty&pn=Vallaiah%20Reddy%20Milk&am=55&cu=INR">click here to pay manually</a>.</p>
   </body>
 </html>
