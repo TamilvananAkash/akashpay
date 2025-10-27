@@ -1,14 +1,43 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Akash Pay</title>
-    <!-- Redirects to UPI payment automatically -->
-    <meta http-equiv="refresh" content="2; url=upi://pay?pa=paytm.s1vnqj2@pty&pn=Akash%20Milk%20Shop&am=55&cu=INR">
-  </head>
-  <body>
-    <h2>Redirecting to payment...</h2>
-    <p>If it doesn't open automatically, <a href="upi://pay?pa=paytm.s1vnqj2@pty&pn=Akash%20Milk%20Shop&am=55&cu=INR">click here to pay ₹55</a>.</p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Akash Milk Payment</title>
+  <meta http-equiv="refresh" content="2; url=upi://pay?pa=paytm.s1vnqj2@pty&pn=Akash%20Milk%20Shop&am=55&cu=INR" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f8fa;
+      text-align: center;
+      padding-top: 80px;
+    }
+    h2 {
+      color: #333;
+    }
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      background: #007bff;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 16px;
+    }
+    a:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h2>Redirecting to UPI Payment for ₹55...</h2>
+  <p>If it doesn’t open automatically, click one of the options below:</p>
+
+  <a href="upi://pay?pa=paytm.s1vnqj2@pty&pn=Akash%20Milk%20Shop&am=55&cu=INR">💳 Pay via Paytm</a><br><br>
+  <a href="tez://upi/pay?pa=paytm.s1vnqj2@pty&pn=Akash%20Milk%20Shop&am=55&cu=INR">💰 Pay via Google Pay</a><br><br>
+  <a href="phonepe://upi/pay?pa=paytm.s1vnqj2@pty&pn=Akash%20Milk%20Shop&am=55&cu=INR">📱 Pay via PhonePe</a>
+
+  <p style="margin-top:40px;">Thank you for your payment! 🥛</p>
+</body>
 </html>
