@@ -54,7 +54,7 @@
     <div class="card">
       <h2>Vallaiah Reddy Milk</h2>
       <p>Scan the QR or click below to pay ₹55</p>
-      <img src="https://i.ibb.co/RGgSsjGN/paytm-scanner.jpg" alt="Paytm QR Code" />
+      <img src="https://i.ibb.co/RGgSsjGN/paytm-scanner.jpg" alt="Paytm QR" />
       <p><b>UPI ID:</b> 6303762006@pthdfc</p>
       <button id="payNow">Pay ₹55 Now</button>
     </div>
@@ -66,15 +66,10 @@
         const amount = 55;
         const upiUrl = upi://pay?pa=${upi}&pn=${name}&am=${amount}&cu=INR;
 
-        // Try open in UPI apps
-        const gpay = intent:${upiUrl}#Intent;package=com.google.android.apps.nbu.paisa.user;scheme=upi;end;
-        const paytm = intent:${upiUrl}#Intent;package=net.one97.paytm;scheme=upi;end;
-        const phonepe = intent:${upiUrl}#Intent;package=com.phonepe.app;scheme=upi;end;
+        // Works in Google Pay / PhonePe / Paytm
+        const intentUrl = intent://${upiUrl.replace('upi://', '')}#Intent;scheme=upi;end;
 
-        window.location.href = gpay;
-        setTimeout(() => (window.location.href = paytm), 800);
-        setTimeout(() => (window.location.href = phonepe), 1600);
-        setTimeout(() => (window.location.href = upiUrl), 2400);
+        window.location.href = intentUrl;
       });
     </script>
   </body>
