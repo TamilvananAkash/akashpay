@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="2; url=upi://pay?pa=paytm.s1vnqj2@pty&pn=Vallaiah%20Reddy%20Milk&am=55&cu=INR">
-    <title>Redirecting to Payment...</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Akash Pay</title>
+    <!-- Redirects to UPI payment automatically -->
+    <meta http-equiv="refresh" content="2; url=upi://pay?pa=paytm.s1vnqj2@pty&pn=Akash%20Milk%20Shop&am=55&cu=INR">
   </head>
   <body>
-    <h2>Redirecting to Paytm Payment of ₹55...</h2>
-    <p>If it doesn’t open automatically, <a href="upi://pay?pa=paytm.s1vnqj2@pty&pn=Vallaiah%20Reddy%20Milk&am=55&cu=INR">click here to pay manually</a>.</p>
+    <h2>Redirecting to payment...</h2>
+    <p>If it doesn't open automatically, <a href="upi://pay?pa=paytm.s1vnqj2@pty&pn=Akash%20Milk%20Shop&am=55&cu=INR">click here to pay ₹55</a>.</p>
   </body>
 </html>
