@@ -7,55 +7,66 @@
   <style>
     body {
       font-family: Arial, sans-serif;
+      background: #f0f4ff;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background: #f7f7f7;
     }
     .card {
       background: white;
       padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       text-align: center;
+      width: 300px;
     }
     h2 {
+      margin-bottom: 20px;
       color: #333;
     }
     button {
-      margin: 8px;
-      padding: 12px 24px;
-      font-size: 16px;
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
       border: none;
       border-radius: 8px;
+      font-size: 16px;
       cursor: pointer;
       color: white;
-      width: 200px;
     }
-    .gpay { background-color: #4285F4; }
-    .paytm { background-color: #00baf2; }
-    .phonepe { background-color: #5f259f; }
+    .gpay { background: #4285f4; }
+    .paytm { background: #00baf2; }
+    .phonepe { background: #6f2cff; }
   </style>
 </head>
 <body>
   <div class="card">
     <h2>Vallaiah Reddy Milk</h2>
-    <p>Click an app below to pay ₹55</p>
-    <button class="gpay" onclick="openUPI('tez://upi/pay?pa=paytm.s1vnqj2@pty&pn=Vallaiah%20Reddy%20Milk&am=55&cu=INR')">Pay with GPay</button><br>
-    <button class="paytm" onclick="openUPI('paytmmp://pay?pa=paytm.s1vnqj2@pty&pn=Vallaiah%20Reddy%20Milk&am=55&cu=INR')">Pay with Paytm</button><br>
-    <button class="phonepe" onclick="openUPI('phonepe://upi/pay?pa=paytm.s1vnqj2@pty&pn=Vallaiah%20Reddy%20Milk&am=55&cu=INR')">Pay with PhonePe</button>
+    <p>Click below to pay ₹55</p>
+
+    <button class="gpay" onclick="payWith('tez')">Pay with GPay</button>
+    <button class="paytm" onclick="payWith('paytm')">Pay with Paytm</button>
+    <button class="phonepe" onclick="payWith('phonepe')">Pay with PhonePe</button>
   </div>
 
   <script>
-    function openUPI(url) {
-      // Try to open UPI app directly
-      window.location.href = url;
-      
-      // If browser blocks it, redirect after small delay
-      setTimeout(() => {
-        window.location.href = url;
-      }, 800);
+    function payWith(app) {
+      const upiId = "paytm.s1vnqj2@pty";
+      const name = "Vallaiah Reddy Milk";
+      const amount = 55;
+      const upiUrl = upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR;
+
+      if (app === 'tez') {
+        window.location.href = tez://${upiUrl};
+      } else if (app === 'paytm') {
+        window.location.href = paytm://${upiUrl};
+      } else if (app === 'phonepe') {
+        window.location.href = phonepe://${upiUrl};
+      } else {
+        window.location.href = upiUrl;
+      }
     }
   </script>
 </body>
