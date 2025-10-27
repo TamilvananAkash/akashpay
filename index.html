@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vallaiah Reddy Milk Payment</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #f4f7ff;
+      background: #f5f7ff;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -19,14 +19,14 @@
       padding: 25px;
       border-radius: 15px;
       text-align: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      width: 320px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 330px;
     }
     h2 {
-      color: #222;
+      color: #111;
     }
     img {
-      width: 230px;
+      width: 240px;
       border-radius: 10px;
       margin: 10px 0;
     }
@@ -35,14 +35,17 @@
       font-size: 15px;
     }
     button {
-      margin-top: 10px;
-      padding: 12px 20px;
-      font-size: 16px;
+      background: #1976d2;
       color: #fff;
-      background: #1e88e5;
+      padding: 12px 18px;
+      font-size: 16px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      background: #1565c0;
     }
   </style>
 </head>
@@ -50,28 +53,28 @@
   <div class="card">
     <h2>Vallaiah Reddy Milk</h2>
     <p>Scan the QR or click below to pay ₹55</p>
-    <img src="https://i.ibb.co/SXRCh5t8/28-rupees.jpg" alt="Paytm QR Code">
+    <img src="https://i.ibb.co/SXRCh5t8/28-rupees.jpg" alt="Paytm QR" />
     <p><b>UPI ID:</b> paytm.s1vnqj2@pty</p>
-    <button id="payNow">Pay ₹55 Now</button>
+    <button id="payBtn">Pay ₹55 Now</button>
   </div>
 
   <script>
-    document.getElementById('payNow').addEventListener('click', function() {
-      const upi = 'paytm.s1vnqj2@pty';
-      const name = encodeURIComponent('Vallaiah Reddy Milk');
+    document.getElementById("payBtn").addEventListener("click", () => {
+      const upiID = "paytm.s1vnqj2@pty";
+      const name = encodeURIComponent("Vallaiah Reddy Milk");
       const amount = 55;
-      const upiUrl = upi://pay?pa=${upi}&pn=${name}&am=${amount}&cu=INR;
+      const upiUrl = upi://pay?pa=${upiID}&pn=${name}&am=${amount}&cu=INR;
 
-      // Android intents for major UPI apps
-      const gpay = intent:${upiUrl}#Intent;package=com.google.android.apps.nbu.paisa.user;scheme=upi;end;
-      const paytm = intent:${upiUrl}#Intent;package=net.one97.paytm;scheme=upi;end;
-      const phonepe = intent:${upiUrl}#Intent;package=com.phonepe.app;scheme=upi;end;
+      // Use intent for Android apps (Google Pay, Paytm, PhonePe)
+      const intentUrl = intent:${upiUrl}#Intent;package=com.google.android.apps.nbu.paisa.user;scheme=upi;end;
 
-      // Try them in sequence
-      window.location.href = gpay;
-      setTimeout(() => window.location.href = paytm, 800);
-      setTimeout(() => window.location.href = phonepe, 1600);
-      setTimeout(() => window.location.href = upiUrl, 2400);
+      // Try open in Android UPI app
+      window.location.href = intentUrl;
+
+      // Fallback: open raw UPI link (some browsers block intent)
+      setTimeout(() => {
+        window.location.href = upiUrl;
+      }, 1500);
     });
   </script>
 </body>
