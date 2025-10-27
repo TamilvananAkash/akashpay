@@ -6,68 +6,73 @@
   <title>Vallaiah Reddy Milk Payment</title>
   <style>
     body {
-      background-color: #eef2ff;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f7ff;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      font-family: Arial, sans-serif;
+      margin: 0;
     }
     .card {
       background: #fff;
       padding: 25px;
       border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       text-align: center;
-      width: 300px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 320px;
     }
     h2 {
-      margin-bottom: 10px;
+      color: #222;
+    }
+    img {
+      width: 230px;
+      border-radius: 10px;
+      margin: 10px 0;
     }
     p {
-      margin-bottom: 20px;
+      color: #444;
+      font-size: 15px;
     }
     button {
-      display: block;
-      width: 100%;
-      margin: 8px 0;
-      padding: 12px;
+      margin-top: 10px;
+      padding: 12px 20px;
+      font-size: 16px;
+      color: #fff;
+      background: #1e88e5;
       border: none;
       border-radius: 8px;
-      color: white;
-      font-size: 16px;
       cursor: pointer;
     }
-    .gpay { background-color: #4285F4; }
-    .paytm { background-color: #00baf2; }
-    .phonepe { background-color: #6f42c1; }
   </style>
 </head>
 <body>
   <div class="card">
     <h2>Vallaiah Reddy Milk</h2>
-    <p>Click below to pay ₹55</p>
-    <button class="gpay" onclick="payWith('gpay')">Pay with GPay</button>
-    <button class="paytm" onclick="payWith('paytm')">Pay with Paytm</button>
-    <button class="phonepe" onclick="payWith('phonepe')">Pay with PhonePe</button>
+    <p>Scan the QR or click below to pay ₹55</p>
+    <img src="https://i.ibb.co/SXRCh5t8/28-rupees.jpg" alt="Paytm QR Code">
+    <p><b>UPI ID:</b> paytm.s1vnqj2@pty</p>
+    <button id="payNow">Pay ₹55 Now</button>
   </div>
 
   <script>
-    function payWith(app) {
+    document.getElementById('payNow').addEventListener('click', function() {
       const upi = 'paytm.s1vnqj2@pty';
-      const name = 'Vallaiah Reddy Milk';
+      const name = encodeURIComponent('Vallaiah Reddy Milk');
       const amount = 55;
-      const url = upi://pay?pa=${upi}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR;
+      const upiUrl = upi://pay?pa=${upi}&pn=${name}&am=${amount}&cu=INR;
 
-      // Open based on selected app
-      if (app === 'gpay') {
-        window.location.href = intent://${url}#Intent;package=com.google.android.apps.nbu.paisa.user;scheme=upi;end;
-      } else if (app === 'paytm') {
-        window.location.href = intent://${url}#Intent;package=net.one97.paytm;scheme=upi;end;
-      } else if (app === 'phonepe') {
-        window.location.href = intent://${url}#Intent;package=com.phonepe.app;scheme=upi;end;
-      }
-    }
+      // Android intents for major UPI apps
+      const gpay = intent:${upiUrl}#Intent;package=com.google.android.apps.nbu.paisa.user;scheme=upi;end;
+      const paytm = intent:${upiUrl}#Intent;package=net.one97.paytm;scheme=upi;end;
+      const phonepe = intent:${upiUrl}#Intent;package=com.phonepe.app;scheme=upi;end;
+
+      // Try them in sequence
+      window.location.href = gpay;
+      setTimeout(() => window.location.href = paytm, 800);
+      setTimeout(() => window.location.href = phonepe, 1600);
+      setTimeout(() => window.location.href = upiUrl, 2400);
+    });
   </script>
 </body>
 </html>
