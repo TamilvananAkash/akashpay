@@ -3,41 +3,115 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Akash Milk Payment</title>
-  <meta http-equiv="refresh" content="2; url=upi://pay?pa=paytm.s1vnqj2@pty&pn=Akash%20Milk%20Shop&am=55&cu=INR" />
+  <title>Vallaiah Reddy Milk Payment</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f7f8fa;
-      text-align: center;
-      padding-top: 80px;
+      font-family: "Poppins", Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(180deg, #fdfbfb 0%, #ebedee 100%);
     }
+
+    .card {
+      text-align: center;
+      background: #fff;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 400px;
+    }
+
+    img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+
     h2 {
       color: #333;
+      margin-bottom: 8px;
     }
-    a {
-      display: inline-block;
-      margin-top: 20px;
-      background: #007bff;
+
+    p {
+      color: #555;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 18px;
+      width: 80%;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      margin: 8px 0;
       color: white;
-      padding: 12px 24px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
     }
-    a:hover {
-      background: #0056b3;
+
+    .paytm { background: #002970; }
+    .gpay { background: #4285F4; }
+    .phonepe { background: #5e1cc6; }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    footer {
+      margin-top: 15px;
+      font-size: 12px;
+      color: #777;
     }
   </style>
 </head>
 <body>
-  <h2>Redirecting to UPI Payment for ₹55...</h2>
-  <p>If it doesn’t open automatically, click one of the options below:</p>
+  <div class="card">
+    <!-- 👇 You can replace this image link with your milk logo later -->
+    <img src="https://cdn-icons-png.flaticon.com/512/2643/2643613.png" alt="Milk Logo" />
+    
+    <h2>Vallaiah Reddy Milk</h2>
+    <p>Pay securely using UPI</p>
 
-  <a href="upi://pay?pa=paytm.s1vnqj2@pty&pn=Akash%20Milk%20Shop&am=55&cu=INR">💳 Pay via Paytm</a><br><br>
-  <a href="tez://upi/pay?pa=paytm.s1vnqj2@pty&pn=Akash%20Milk%20Shop&am=55&cu=INR">💰 Pay via Google Pay</a><br><br>
-  <a href="phonepe://upi/pay?pa=paytm.s1vnqj2@pty&pn=Akash%20Milk%20Shop&am=55&cu=INR">📱 Pay via PhonePe</a>
+    <input type="number" id="amount" placeholder="Enter amount ₹ (e.g. 55)" />
 
-  <p style="margin-top:40px;">Thank you for your payment! 🥛</p>
+    <button class="btn paytm" onclick="pay()">💳 Pay via UPI</button>
+
+    <footer>Powered by Paytm UPI</footer>
+  </div>
+
+  <script>
+    function pay() {
+      const amount = document.getElementById('amount').value;
+      if (!amount || amount <= 0) {
+        alert('Please enter a valid amount');
+        return;
+      }
+
+      const upiID = "paytm.s1vnqj2@pty";
+      const name = "Vallaiah Reddy Milk";
+      const upiURL = upi://pay?pa=${upiID}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR;
+
+      // Redirect to UPI app
+      window.location.href = upiURL;
+    }
+  </script>
 </body>
 </html>
