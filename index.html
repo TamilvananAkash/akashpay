@@ -1,71 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vallaiah Reddy Milk Payment</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f0f4ff;
+      background-color: #eef2ff;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      font-family: Arial, sans-serif;
     }
     .card {
-      background: white;
-      padding: 30px;
+      background: #fff;
+      padding: 25px;
       border-radius: 15px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       text-align: center;
       width: 300px;
     }
     h2 {
+      margin-bottom: 10px;
+    }
+    p {
       margin-bottom: 20px;
-      color: #333;
     }
     button {
       display: block;
       width: 100%;
-      margin: 10px 0;
-      padding: 10px;
+      margin: 8px 0;
+      padding: 12px;
       border: none;
       border-radius: 8px;
+      color: white;
       font-size: 16px;
       cursor: pointer;
-      color: white;
     }
-    .gpay { background: #4285f4; }
-    .paytm { background: #00baf2; }
-    .phonepe { background: #6f2cff; }
+    .gpay { background-color: #4285F4; }
+    .paytm { background-color: #00baf2; }
+    .phonepe { background-color: #6f42c1; }
   </style>
 </head>
 <body>
   <div class="card">
     <h2>Vallaiah Reddy Milk</h2>
     <p>Click below to pay ₹55</p>
-
-    <button class="gpay" onclick="payWith('tez')">Pay with GPay</button>
+    <button class="gpay" onclick="payWith('gpay')">Pay with GPay</button>
     <button class="paytm" onclick="payWith('paytm')">Pay with Paytm</button>
     <button class="phonepe" onclick="payWith('phonepe')">Pay with PhonePe</button>
   </div>
 
   <script>
     function payWith(app) {
-      const upiId = "paytm.s1vnqj2@pty";
-      const name = "Vallaiah Reddy Milk";
+      const upi = 'paytm.s1vnqj2@pty';
+      const name = 'Vallaiah Reddy Milk';
       const amount = 55;
-      const upiUrl = upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR;
+      const url = upi://pay?pa=${upi}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR;
 
-      if (app === 'tez') {
-        window.location.href = tez://${upiUrl};
+      // Open based on selected app
+      if (app === 'gpay') {
+        window.location.href = intent://${url}#Intent;package=com.google.android.apps.nbu.paisa.user;scheme=upi;end;
       } else if (app === 'paytm') {
-        window.location.href = paytm://${upiUrl};
+        window.location.href = intent://${url}#Intent;package=net.one97.paytm;scheme=upi;end;
       } else if (app === 'phonepe') {
-        window.location.href = phonepe://${upiUrl};
-      } else {
-        window.location.href = upiUrl;
+        window.location.href = intent://${url}#Intent;package=com.phonepe.app;scheme=upi;end;
       }
     }
   </script>
