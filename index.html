@@ -7,13 +7,13 @@
   <style>
     body {
       font-family: "Poppins", sans-serif;
-      background: #e8f5e9;
+      background: linear-gradient(180deg, #004d00, #006600);
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
-      transition: background 0.5s ease;
+      color: white;
     }
 
     iframe {
@@ -21,13 +21,13 @@
       height: 800px;
       border: none;
       border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
     }
 
     #thankyou {
       display: none;
-      background: linear-gradient(135deg, #a8e6a1, #7ac77b);
-      color: #064d00;
+      background: linear-gradient(135deg, #006400, #009933);
+      color: white;
       font-family: "Poppins", sans-serif;
       text-align: center;
       padding: 60px;
@@ -35,6 +35,7 @@
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
       width: 600px;
       margin: auto;
+      animation: fadeIn 1s ease;
     }
 
     #thankyou h1 {
@@ -54,7 +55,7 @@
       border-radius: 10px;
       cursor: pointer;
       margin: 5px;
-      transition: transform 0.2s ease, opacity 0.3s ease;
+      transition: transform 0.2s ease;
     }
 
     .home {
@@ -68,19 +69,21 @@
     }
 
     button:hover {
-      opacity: 0.9;
       transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
 <body>
-  <!-- Embed your Formfacade form -->
   <div id="form-section">
     <div id="ff-compose"></div>
     <script async defer src="https://formfacade.com/include/101076656876589669527/form/1FAIpQLSfe9Udzbn0j11fcyPG6hIRowZukXL1hYk7WR9HOj5r7HhEXkA/classic.js?div=ff-compose"></script>
   </div>
 
-  <!-- Custom Thank You Page -->
   <div id="thankyou">
     <h1>✅ Thank You for Your Order!</h1>
     <p>Your milk delivery request has been received 🥛</p>
@@ -91,34 +94,18 @@
   </div>
 
   <script>
-    // Detect Formfacade submission and show thank-you screen
-    const observer = new MutationObserver(() => {
-      const iframe = document.querySelector("iframe");
-      if (!iframe) return;
-
-      try {
-        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-        const thankYouText = iframeDoc.body.innerText || "";
-
-        // Detect submission confirmation
-        if (thankYouText.includes("Your response has been recorded")) {
-          document.getElementById("form-section").style.display = "none";
-          document.body.style.background = "linear-gradient(135deg, #a8e6a1, #7ac77b)";
-          document.getElementById("thankyou").style.display = "block";
-        }
-      } catch (err) {
-        // Ignore cross-origin errors safely
-      }
-    });
-
-    // Observe changes in body (when iframe content changes)
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    function showForm() {
-      document.getElementById("thankyou").style.display = "none";
-      document.getElementById("form-section").style.display = "block";
-      document.body.style.background = "#e8f5e9";
+  // Listen for form submission
+  window.addEventListener("message", function (event) {
+    if (event.data && event.data.type === "formfacade_submit") {
+      document.getElementById("form-section").style.display = "none";
+      document.getElementById("thankyou").style.display = "block";
     }
+  });
+
+  function showForm() {
+    document.getElementById("thankyou").style.display = "none";
+    document.getElementById("form-section").style.display = "block";
+  }
   </script>
 </body>
 </html>
